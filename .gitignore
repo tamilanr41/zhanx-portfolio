@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets (never commit these)
+.env
+.env.local
+.env.production
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Backend lives in its own repo (https://github.com/tamilanr41/backend.git)
+server/
