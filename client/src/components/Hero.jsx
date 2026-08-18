@@ -175,7 +175,7 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative" ref={imgRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+          <div className="relative" ref={imgRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} data-lenis-prevent>
             <div className="absolute -top-4 -left-4 right-0 bottom-0 border border-[--gold] pointer-events-none" />
             <img
               src={zhanxPortrait}
