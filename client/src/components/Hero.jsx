@@ -20,16 +20,6 @@ export default function Hero() {
 
   const handleMouseLeave = () => setMask('')
 
-  const handleTouchMove = (e) => {
-    const touch = e.touches[0]
-    const rect = imgRef.current.getBoundingClientRect()
-    const x = touch.clientX - rect.left
-    const y = touch.clientY - rect.top
-    setMask(`radial-gradient(circle at ${x}px ${y}px, transparent 70px, rgba(0,0,0,1) 71px)`)
-  }
-
-  const handleTouchEnd = () => setMask('')
-
   useEffect(() => {
     const current = roles[roleIndex]
     let timer
@@ -78,16 +68,6 @@ export default function Hero() {
     const rect = e.currentTarget.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top
-    mx.set((px / rect.width) * 2 - 1)
-    my.set((py / rect.height) * 2 - 1)
-    gx.set(px)
-    gy.set(py)
-  }
-  const handleTitleTouchMove = (e) => {
-    const touch = e.touches[0]
-    const rect = e.currentTarget.getBoundingClientRect()
-    const px = touch.clientX - rect.left
-    const py = touch.clientY - rect.top
     mx.set((px / rect.width) * 2 - 1)
     my.set((py / rect.height) * 2 - 1)
     gx.set(px)
@@ -145,9 +125,6 @@ export default function Hero() {
             onMouseMove={handleTitleMove}
             onMouseEnter={handleTitleEnter}
             onMouseLeave={handleTitleLeave}
-            onTouchMove={handleTitleTouchMove}
-            onTouchStart={handleTitleEnter}
-            onTouchEnd={handleTitleLeave}
             className={`font-display leading-[0.9] text-[clamp(3rem,10vw,7rem)] uppercase relative cursor-default select-none ${tiltActive ? 'text-glow-hero' : ''}`}
             style={{ rotateX, rotateY, x: translateX, y: translateY, transformPerspective: 800 }}
           >
@@ -198,7 +175,7 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative" ref={imgRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} data-lenis-prevent>
+          <div className="relative" ref={imgRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
             <div className="absolute -top-4 -left-4 right-0 bottom-0 border border-[--gold] pointer-events-none" />
             <img
               src={zhanxPortrait}

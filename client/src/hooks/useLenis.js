@@ -3,13 +3,11 @@ import Lenis from 'lenis'
 
 export default function useLenis() {
   useEffect(() => {
-    const isMobile = window.innerWidth < 768
     const lenis = new Lenis({
-      duration: isMobile ? 1.2 : 0.75,
+      duration: 0.75,
       easing: (t) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
-      touchMultiplier: isMobile ? 0.8 : 1.2,
-      infinite: false,
+      touchMultiplier: 1.2,
     })
     window.__lenis = lenis
 

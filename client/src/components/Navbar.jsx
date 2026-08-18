@@ -17,15 +17,7 @@ export default function Navbar() {
   const location = useLocation()
 
   useEffect(() => {
-    let ticking = false
-    const onScroll = () => {
-      if (ticking) return
-      ticking = true
-      requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 40)
-        ticking = false
-      })
-    }
+    const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll, { passive: true })
 
     const updateTime = () => {
@@ -41,13 +33,6 @@ export default function Navbar() {
     updateTime()
     const clockInterval = setInterval(updateTime, 1000)
 
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      clearInterval(clockInterval)
-    }
-  }, [])
-
-  useEffect(() => {
     const logInterval = setInterval(() => {
       if (menuOpen && !isProcessing) {
         const events = [
@@ -62,7 +47,12 @@ export default function Navbar() {
         setTelemetryLogs(prev => [...prev.slice(-6), newLog])
       }
     }, 4000)
-    return () => clearInterval(logInterval)
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      clearInterval(clockInterval)
+      clearInterval(logInterval)
+    }
   }, [menuOpen, isProcessing])
 
   useEffect(() => {

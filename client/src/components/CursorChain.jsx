@@ -3,10 +3,6 @@ import { useEffect, useRef } from 'react'
 const N = 11
 const BASE = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6, 5.5, 5]
 
-function isTouchDevice() {
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0
-}
-
 export default function CursorChain() {
   const dotRefs = useRef([])
   const mouse = useRef({ x: -100, y: -100 })
@@ -14,8 +10,6 @@ export default function CursorChain() {
   const raf = useRef(null)
 
   useEffect(() => {
-    if (isTouchDevice()) return
-
     const positions = Array.from({ length: N }, () => ({ x: -100, y: -100 }))
 
     const onMove = (e) => {
