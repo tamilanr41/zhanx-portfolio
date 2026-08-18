@@ -4,8 +4,6 @@ import heroPortrait from '../assets/hero-portrait.jpg'
 import zhanxPortrait from '../assets/zhanx-portrait.jpeg'
 const roles = ['FULL STACK DEVELOPER', 'MERN SPECIALIST', 'UI CRAFTSMAN', 'PROBLEM SOLVER']
 
-const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0)
   const [displayText, setDisplayText] = useState('')
@@ -14,7 +12,6 @@ export default function Hero() {
   const [mask, setMask] = useState('')
 
   const handleMouseMove = (e) => {
-    if (isMobile) return
     const rect = imgRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
@@ -68,7 +65,6 @@ export default function Hero() {
   const glowOpacity = useSpring(useTransform(hoverStrength, [0, 1], [0, 1]), { stiffness: 130, damping: 18 })
 
   const handleTitleMove = (e) => {
-    if (isMobile) return
     const rect = e.currentTarget.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top
@@ -192,8 +188,8 @@ export default function Hero() {
               alt="Zhanx Studio"
               className="hero-image absolute inset-0 pointer-events-none"
               style={{
-                WebkitMaskImage: isMobile ? 'radial-gradient(circle at 50% 50%, black 60%, transparent 100%)' : (mask || 'none'),
-                maskImage: isMobile ? 'radial-gradient(circle at 50% 50%, black 60%, transparent 100%)' : (mask || 'none'),
+                WebkitMaskImage: mask || 'none',
+                maskImage: mask || 'none',
                 WebkitMaskRepeat: 'no-repeat',
                 maskRepeat: 'no-repeat',
                 filter: 'grayscale(1) contrast(1.2) brightness(0.65)',
