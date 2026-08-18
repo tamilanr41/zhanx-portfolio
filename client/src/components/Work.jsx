@@ -48,18 +48,15 @@ export default function Work() {
           <div>
             {/* Eyebrow: character-by-character blur+slide */}
             <p className="text-[0.68rem] tracking-[0.4em] text-[--gold] mb-4 uppercase font-mono overflow-hidden">
-              {'SELECTED PROJECTS · 2024—2025'.split('').map((ch, i) => (
-                <motion.span
-                  key={i}
-                  className="inline-block"
-                  initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
-                  whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-                  viewport={{ once: true, margin: '50px' }}
-                  transition={{ duration: 0.5, delay: i * 0.025, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {ch === ' ' ? '\u00A0' : ch}
-                </motion.span>
-              ))}
+              <motion.span
+                className="inline-block"
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                viewport={{ once: true, margin: '50px' }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {'SELECTED PROJECTS · 2024—2025'}
+              </motion.span>
             </p>
 
             {/* Title: word-by-word blur+slide up */}

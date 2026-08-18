@@ -18,21 +18,27 @@ export default function Services() {
   const stepRefs = useRef([])
 
   useEffect(() => {
+    let ticking = false
     const handleScroll = () => {
-      let active = 0
-      let minTop = Infinity
-      stepRefs.current.forEach((el, i) => {
-        if (!el) return
-        const top = el.getBoundingClientRect().top
-        if (top > 90 && top < minTop) {
-          minTop = top
-          active = i
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        let active = 0
+        let minTop = Infinity
+        stepRefs.current.forEach((el, i) => {
+          if (!el) return
+          const top = el.getBoundingClientRect().top
+          if (top > 90 && top < minTop) {
+            minTop = top
+            active = i
+          }
+        })
+        if (minTop === Infinity && stepRefs.current.length > 0) {
+          active = stepRefs.current.length - 1
         }
+        setActiveIndex(active)
+        ticking = false
       })
-      if (minTop === Infinity && stepRefs.current.length > 0) {
-        active = stepRefs.current.length - 1
-      }
-      setActiveIndex(active)
     }
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })

@@ -1,29 +1,35 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
 export default function PageShell({ index, eyebrow, title, children }) {
   return (
     <section className="relative min-h-screen pt-28 pb-20 overflow-hidden bg-[--background]">
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-        initial={{ y: 0 }}
-        animate={{ y: -60 }}
-        transition={{ duration: 8, ease: 'linear', repeat: Infinity, repeatType: 'mirror' }}
-      >
-        <span className="text-[clamp(10rem,30vw,26rem)] font-display font-black text-[rgba(201,168,76,0.04)] leading-none">
-          {index}
-        </span>
-      </motion.div>
-      <motion.div
-        className="absolute right-0 top-32 w-72 h-72 rounded-full border border-[rgba(201,168,76,0.25)] pointer-events-none"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute -left-10 bottom-24 w-48 h-48 rounded-full border border-[rgba(201,168,76,0.15)] pointer-events-none"
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      {!isMobile && (
+        <>
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+            initial={{ y: 0 }}
+            animate={{ y: -60 }}
+            transition={{ duration: 8, ease: 'linear', repeat: Infinity, repeatType: 'mirror' }}
+          >
+            <span className="text-[clamp(10rem,30vw,26rem)] font-display font-black text-[rgba(201,168,76,0.04)] leading-none">
+              {index}
+            </span>
+          </motion.div>
+          <motion.div
+            className="absolute right-0 top-32 w-72 h-72 rounded-full border border-[rgba(201,168,76,0.25)] pointer-events-none"
+            animate={{ y: [0, -20, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="absolute -left-10 bottom-24 w-48 h-48 rounded-full border border-[rgba(201,168,76,0.15)] pointer-events-none"
+            animate={{ y: [0, 15, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </>
+      )}
 
       <div className="max-w-[1280px] mx-auto px-6 relative z-10">
         <Link
