@@ -196,8 +196,8 @@ export default function Hero() {
               alt="Zhanx Studio"
               className="hero-image absolute inset-0 pointer-events-none"
               style={{
-                WebkitMaskImage: mask || 'none',
-                maskImage: mask || 'none',
+                WebkitMaskImage: isMobile ? 'radial-gradient(circle at 50% 50%, black 60%, transparent 100%)' : (mask || 'none'),
+                maskImage: isMobile ? 'radial-gradient(circle at 50% 50%, black 60%, transparent 100%)' : (mask || 'none'),
                 WebkitMaskRepeat: 'no-repeat',
                 maskRepeat: 'no-repeat',
                 filter: 'grayscale(1) contrast(1.2) brightness(0.65)',
