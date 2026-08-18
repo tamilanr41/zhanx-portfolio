@@ -4,6 +4,8 @@ import heroPortrait from '../assets/hero-portrait.jpg'
 import zhanxPortrait from '../assets/zhanx-portrait.jpeg'
 const roles = ['FULL STACK DEVELOPER', 'MERN SPECIALIST', 'UI CRAFTSMAN', 'PROBLEM SOLVER']
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0)
   const [displayText, setDisplayText] = useState('')
@@ -12,6 +14,7 @@ export default function Hero() {
   const [mask, setMask] = useState('')
 
   const handleMouseMove = (e) => {
+    if (isMobile) return
     const rect = imgRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
@@ -65,6 +68,7 @@ export default function Hero() {
   const glowOpacity = useSpring(useTransform(hoverStrength, [0, 1], [0, 1]), { stiffness: 130, damping: 18 })
 
   const handleTitleMove = (e) => {
+    if (isMobile) return
     const rect = e.currentTarget.getBoundingClientRect()
     const px = e.clientX - rect.left
     const py = e.clientY - rect.top
@@ -88,24 +92,28 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative overflow-hidden pt-32 pb-24 min-h-screen flex items-center bg-[--background]">
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-        style={{ y: watermarkY }}
-      >
-        <span className="text-[clamp(6rem,20vw,16rem)] font-display font-black text-[rgba(201,168,76,0.04)] whitespace-nowrap leading-none">
-          TAMILAN
-        </span>
-      </motion.div>
-      <motion.div
-        className="absolute right-0 top-24 w-72 h-72 rounded-full border border-[rgba(201,168,76,0.4)] pointer-events-none"
-        animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute -left-10 bottom-40 w-48 h-48 rounded-full border border-[rgba(201,168,76,0.2)] pointer-events-none"
-        animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      {!isMobile && (
+        <>
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+            style={{ y: watermarkY }}
+          >
+            <span className="text-[clamp(6rem,20vw,16rem)] font-display font-black text-[rgba(201,168,76,0.04)] whitespace-nowrap leading-none">
+              TAMILAN
+            </span>
+          </motion.div>
+          <motion.div
+            className="absolute right-0 top-24 w-72 h-72 rounded-full border border-[rgba(201,168,76,0.4)] pointer-events-none"
+            animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="absolute -left-10 bottom-40 w-48 h-48 rounded-full border border-[rgba(201,168,76,0.2)] pointer-events-none"
+            animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </>
+      )}
       <div className="absolute right-10 top-44 w-44 h-28 opacity-60 pointer-events-none diagonal-lines" />
 
       <div className="max-w-[1280px] mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
